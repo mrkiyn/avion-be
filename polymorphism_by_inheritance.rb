@@ -23,10 +23,10 @@ class Strings < Instruments
 end
 
 drums = Percussion.new("Drums", "percussion")
-puts drums.description
-puts drums.additional_info
+drums.description
+drums.additional_info
 
 guitar = Strings.new("Guitar", "strings")
-puts guitar.description
-puts guitar.additional_info
+guitar.description
+guitar.additional_info
     
