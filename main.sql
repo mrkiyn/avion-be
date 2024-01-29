@@ -21,3 +21,14 @@ UPDATE students SET first_name = 'Ivan', middle_name = 'Ingram', last_name = 'Ho
 DELETE FROM students WHERE id = 6
 
 SELECT * FROM students
+
+SELECT COUNT(*) as no_of_students FROM students
+
+SELECT * FROM students WHERE location = 'Manila'
+
+SELECT AVG(age) as average_age FROM students
+
+--or
+--SELECT ROUND(AVG(age),2) as average_age FROM students
+
+SELECT * FROM students ORDER BY age desc
