@@ -15,4 +15,6 @@ def is_isogram(string)
 end
 
 
-puts is_isogram("chek")   
+puts is_isogram("Dermatoglyphics" ) # true
+puts is_isogram("aba" ) # false
+puts is_isogram("moOse" ) # false - ignore letter case
