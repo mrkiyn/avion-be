@@ -32,3 +32,66 @@ SELECT AVG(age) as average_age FROM students
 --SELECT ROUND(AVG(age),2) as average_age FROM students
 
 SELECT * FROM students ORDER BY age desc
+
+
+
+---------------------------------------------------------------------------------------------------
+
+
+
+
+CREATE TYPE valid_grade AS ENUM ('A', 'B', 'C', 'D', 'E', 'F');
+
+CREATE TABLE research_papers (
+	id INTEGER PRIMARY KEY,
+	student_id INTEGER REFERENCES students(id),
+	grade VALID_GRADE
+)
+
+-- ERROR ON TYPE
+-- INSERT INTO research_papers (id, student_id, grade)
+-- VALUES (1, 1, 'G')
+
+
+INSERT INTO research_papers (id, student_id, grade)
+VALUES (1, 1, 'C'),
+(2, 1, 'A'),
+(3, 1, 'A'),
+(4, 2, 'B'),
+(5, 3, NULL),
+(6, 3, 'B'),
+(7, 4, 'C'),
+(8, 5, NULL),
+(9, 5, 'C'),
+(10, 5, 'B')
+
+
+SELECT * FROM research_papers
+
+-- Query all students with multiple research papers (select first_name, last_name, and number_of_research_papers only)
+
+
+SELECT
+    students.id, students.first_name, students.last_name,
+    COUNT(research_papers.id) AS number_of_research_papers
+FROM
+    students
+JOIN
+    research_papers ON students.id = research_papers.student_id
+GROUP BY
+    students.id,  students.first_name, students.last_name
+HAVING
+    COUNT(research_papers.id) > 1;
+
+
+
+-- Query all students with ungraded research papers (select first_name, last_name, research_paper_id, and grade only)
+
+SELECT 
+	students.first_name, students.last_name, research_papers.id, research_papers.grade
+FROM 
+	students
+JOIN 
+	research_papers ON students.id = research_papers.student_id
+WHERE 
+	research_papers.grade IS NULL;
